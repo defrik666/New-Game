@@ -330,8 +330,9 @@ MonoBehaviour:
   cartridgeEjection: {fileID: 0}
   anim: {fileID: 0}
   shootingPoint: {fileID: 1354105214}
-  Bullets: 12
+  Bullets: 100
   Range: 100
+  spread: 0.01
 --- !u!4 &161283158
 Transform:
   m_ObjectHideFlags: 0
@@ -817,7 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recoilX: -2
   recoilY: 2
-  recoilZ: 0
+  recoilZ: 0.35
   snappiness: 6
   returnSpeed: 2
 --- !u!4 &1282091534

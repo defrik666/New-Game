@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Gunstock
   - Handle
   - Forearm
+  - GunStock
+  - Weapon
   layers:
   - Default
   - TransparentFX
