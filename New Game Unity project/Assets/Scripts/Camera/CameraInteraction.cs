@@ -13,7 +13,7 @@ public class CameraInteraction : MonoBehaviour{
         Debug.DrawRay(gameObject.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction * 100, Color.black);
     }
 
-    public void Interact(InputAction.CallbackContext context){ 
+    public void Interact(InputAction.CallbackContext context){
         if(context.performed){
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

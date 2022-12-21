@@ -13,16 +13,18 @@ public class Gun : MonoBehaviour{
     [SerializeField] ParticleSystem cartridgeEjection;
 
     [Header("Objects")]
-    private Recoil recoil;
+    public Recoil recoilScript;
     RaycastHit RayHit;
     private Camera playerCam;
     public Animator anim;
     public Transform shootingPoint;
 
     [Header("General Gun Stats")]
-    [SerializeField] int Bullets = 12;
-    [SerializeField] int Range = 100;
-    [SerializeField] float spread = 0.01f;
+    [SerializeField] public int ammo;
+    [SerializeField] int bullets;
+    [SerializeField] int range = 100;
+    [SerializeField] public float spread = 0.01f;
+    [SerializeField] public float recoil;
 
     [Header("Coroutines")]
     Coroutine fireCoroutine;
@@ -30,7 +32,7 @@ public class Gun : MonoBehaviour{
 
     private void Awake(){
         playerCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        recoil = FindObjectOfType<Recoil>();
+        recoilScript = FindObjectOfType<Recoil>();
     }
 
     private void Update() {
@@ -40,13 +42,16 @@ public class Gun : MonoBehaviour{
     public void  Shoot(InputAction.CallbackContext context){
         Debug.Log(context);
         if(context.performed){
-            if (Bullets <= 0){
+            if (bullets <= 0){
                 return;
             }
 
             fireCoroutine = StartCoroutine(Shooting());
         }
         else if(context.canceled){
+            if(fireCoroutine == null){
+                return;
+            }
             StopCoroutine(fireCoroutine);
         }
     }
@@ -78,22 +83,22 @@ public class Gun : MonoBehaviour{
 	}
 
     private IEnumerator Shooting(){
-        while(Bullets > 0){
+        while(bullets > 0){
             //muzzleFlash.Play();
             //cartridgeEjection.Play();
 
             //if (Bullets > 1) anim.Play("Shoot");
             //else anim.Play("Shoot_Last");
 
-            Bullets--;
+            bullets--;
 
             Vector3 startPoint = playerCam.transform.position;
             Vector3 direction = playerCam.transform.forward + new Vector3 (Random.Range(-spread,spread),Random.Range(-spread,spread),Random.Range(-spread,spread));
-            if (Physics.Raycast(startPoint, direction.normalized, out RayHit, Range)){
+            if (Physics.Raycast(startPoint, direction.normalized, out RayHit, range)){
                 HandleHit(RayHit);
             }
 
-            recoil.RecoilFire();
+            recoilScript.RecoilFire();
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;   

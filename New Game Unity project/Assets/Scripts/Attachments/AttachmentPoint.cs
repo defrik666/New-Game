@@ -5,19 +5,21 @@ public class AttachmentPoint : MonoBehaviour
 {
     public Transform workArea;
     private CameraInteraction camInt;
+    private GunStats gunStats;
     private bool cooldown = false;
 
     private void Start() {
-        camInt = Camera.main.GetComponent<CameraInteraction>();
+        camInt = FindObjectOfType<CameraInteraction>();
+        gunStats = FindObjectOfType<GunStats>();
         workArea = GameObject.Find("Work Area").transform;
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log(other.gameObject + " Entered trigger");
 
         if(other.gameObject.CompareTag(gameObject.tag) && cooldown != true){
             AttachmentMove attachment = other.gameObject.GetComponent<AttachmentMove>();
 
+            gunStats.AddAttachment(attachment.GetComponent<AttachmentStats>());
             attachment.OnAttach(gameObject);
             camInt.pickedUp = false;
 
@@ -26,10 +28,7 @@ public class AttachmentPoint : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other) {
-
-
         GameObject attachment = other.gameObject;
-        Debug.Log(attachment.name + " Exited trigger");
 
         if(attachment.CompareTag(gameObject.tag) && cooldown != true){
             attachment.transform.SetParent(workArea);
