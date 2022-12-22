@@ -16,8 +16,11 @@ public class AttachmentPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
 
-        if(other.gameObject.CompareTag(gameObject.tag) && cooldown != true){
+        if(other.gameObject.CompareTag(gameObject.tag)){
             AttachmentMove attachment = other.gameObject.GetComponent<AttachmentMove>();
+            if(cooldown == true || attachment.attached == true){
+                return;
+            }
 
             gunStats.AddAttachment(attachment.GetComponent<AttachmentStats>());
             attachment.OnAttach(gameObject);
@@ -28,10 +31,16 @@ public class AttachmentPoint : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other) {
-        GameObject attachment = other.gameObject;
 
-        if(attachment.CompareTag(gameObject.tag) && cooldown != true){
+        if(other.CompareTag(gameObject.tag)){
+            AttachmentMove attachment = other.gameObject.GetComponent<AttachmentMove>();
+            if(cooldown == true || attachment.attached == false){
+                return;
+            }
+
+            gunStats.RemoveAttachment(attachment.GetComponent<AttachmentStats>());
             attachment.transform.SetParent(workArea);
+            attachment.attached = false;
             StartCoroutine(Exit());
         }
     }

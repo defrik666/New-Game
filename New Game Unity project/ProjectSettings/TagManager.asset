@@ -8,6 +8,8 @@ TagManager:
   - Forearm
   - GunStock
   - Weapon
+  - Magazine
+  - Handguard
   layers:
   - Default
   - TransparentFX

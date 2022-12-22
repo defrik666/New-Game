@@ -13,17 +13,17 @@ public class ChangeLocation : MonoBehaviour{
     private Gun gun;
     private ActionController actionController;
     [Header("Speed")]
-    public float movementSpeed;
-    public float rotationSpeed;
+    public float SecondsBetwenPositions;
+    public float DegreesForSecond;
 
     private void Awake() {
         actionController = GetComponent<ActionController>();
         gun = FindObjectOfType<Gun>();
         mainCamera = Camera.main.gameObject;
         anim = mainCamera.GetComponent<Animator>();
-        shootingRange = GameObject.Find("/Player/ShootingRange");
-        WeaponPos = GameObject.Find("/Player/ShootingRange/WeaponPos");
-        workBench = GameObject.Find("/Player/Workbench");
+        shootingRange = GameObject.Find("Player/ShootingRange");
+        WeaponPos = GameObject.Find("Player/ShootingRange/WeaponPos");
+        workBench = GameObject.Find("Player/Workbench");
 
     }
 
@@ -41,30 +41,42 @@ public class ChangeLocation : MonoBehaviour{
         gunObj.transform.SetParent(WeaponPos.transform);
         shootingRange.SetActive(true);
 
-        while(Vector3.Distance(gunObj.transform.position, WeaponPos.transform.position) > 0.002f){
-            var moveStep = movementSpeed * Time.deltaTime;
-            var rotStep = rotationSpeed * Time.deltaTime;
-            gun.transform.position = Vector3.Slerp(gun.transform.position, WeaponPos.transform.position, moveStep);
+        var startPos = gun.transform.position;
+        float moveStep = 0;
+
+        while(Vector3.Distance(gunObj.transform.position, WeaponPos.transform.position) > 0.001f){
+            moveStep += Time.deltaTime / SecondsBetwenPositions;
+            float rotStep = DegreesForSecond * Time.deltaTime;
+
+            gun.transform.position = Vector3.Slerp(startPos, WeaponPos.transform.position, moveStep);
             gun.transform.rotation = Quaternion.RotateTowards(gun.transform.rotation, WeaponPos.transform.rotation, rotStep);
-            yield return new WaitForSeconds(0.01f);
+
+            yield return new WaitForEndOfFrame();
         }
 
         gunObj.transform.rotation = WeaponPos.transform.rotation;
         gunObj.transform.position = WeaponPos.transform.position;
 
-        while(Vector3.Distance(gameObject.transform.position, rangePos.transform.position) > 0.08f){
-            var moveStep = movementSpeed * Time.deltaTime;
-            var rotStep = rotationSpeed * Time.deltaTime;
-            gameObject.transform.position = Vector3.Slerp(gameObject.transform.position, rangePos.transform.position, moveStep);
-            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, rangePos.transform.rotation, rotStep);
-            yield return new WaitForSeconds(0.01f);
+        startPos = transform.position;
+        moveStep = 0;
+
+        while(Vector3.Distance(transform.position, rangePos.transform.position) > 0.001f){
+            moveStep += Time.deltaTime / SecondsBetwenPositions;
+            var rotStep = DegreesForSecond * Time.deltaTime;
+
+            transform.position = Vector3.Slerp(startPos, rangePos.transform.position, moveStep);
+            transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, rangePos.transform.rotation, rotStep);
+
+            yield return new WaitForEndOfFrame();
         }
 
-        gameObject.transform.rotation = rangePos.transform.rotation;
-        gameObject.transform.position = rangePos.transform.position;
-        gameObject.transform.SetParent(rangePos.transform);
-        gameObject.GetComponent<MouseLook>().enabled = true;
-
+        transform.rotation = rangePos.transform.rotation;
+        transform.position = rangePos.transform.position;
+        transform.SetParent(rangePos.transform);
+        gameObject.GetComponent<Recoil>().enabled = true;
+        rangePos.GetComponent<MouseLook>().enabled = true;
+        
+        gun.GetComponent<Animator>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         actionController.ChangeToRange(gun);
         yield return null;

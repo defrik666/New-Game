@@ -63,6 +63,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3317293-81d8-4a47-92b0-19cf65d5b0f2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -74,6 +83,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse+Keyboard"",
                     ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7242019c-2397-450b-9671-2a487062cafd"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse+Keyboard"",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -105,6 +125,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         // ShootingRange
         m_ShootingRange = asset.FindActionMap("ShootingRange", throwIfNotFound: true);
         m_ShootingRange_Shoot = m_ShootingRange.FindAction("Shoot", throwIfNotFound: true);
+        m_ShootingRange_Reload = m_ShootingRange.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -198,11 +219,13 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_ShootingRange;
     private IShootingRangeActions m_ShootingRangeActionsCallbackInterface;
     private readonly InputAction m_ShootingRange_Shoot;
+    private readonly InputAction m_ShootingRange_Reload;
     public struct ShootingRangeActions
     {
         private @Controls m_Wrapper;
         public ShootingRangeActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_ShootingRange_Shoot;
+        public InputAction @Reload => m_Wrapper.m_ShootingRange_Reload;
         public InputActionMap Get() { return m_Wrapper.m_ShootingRange; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -215,6 +238,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnShoot;
+                @Reload.started -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_ShootingRangeActionsCallbackInterface = instance;
             if (instance != null)
@@ -222,6 +248,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -242,5 +271,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     public interface IShootingRangeActions
     {
         void OnShoot(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }

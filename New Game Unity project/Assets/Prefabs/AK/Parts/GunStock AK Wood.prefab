@@ -129,8 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 3
   ammo: 0
-  spread: 1
-  recoil: 1
+  spread: 0.02
+  recoil: 2
 --- !u!54 &6998655856332389345
 Rigidbody:
   m_ObjectHideFlags: 0

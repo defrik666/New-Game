@@ -6,7 +6,8 @@ public class AttachmentMove : MonoBehaviour
     public float speed = 5f;
     public bool pickedUp = false;
     public Rigidbody gameObjectRigbody;
-    public GameObject attachTrigger;
+    public GameObject attachTriggerObj;
+    public bool attached = false;
 
     private void Start(){
         gameObjectRigbody = this.gameObject.GetComponent<Rigidbody>();
@@ -38,16 +39,18 @@ public class AttachmentMove : MonoBehaviour
     }
 
     public void OnAttach(GameObject attachObj){
+        attached = true;
         pickedUp = false;
         targetPos = null;
-        attachTrigger = attachObj;
+        attachTriggerObj = attachObj;
 
         gameObjectRigbody.useGravity = false;
         gameObjectRigbody.velocity = Vector3.zero;
         gameObjectRigbody.isKinematic = true;
   
-        transform.SetParent(attachTrigger.transform);
-        transform.position = attachTrigger.transform.position;
+        transform.SetParent(attachTriggerObj.transform);
+        transform.position = attachTriggerObj.transform.position;
+        // attachTriggerObj.GetComponent<AttachmentPoint>().enabled = false;
 
         gameObject.layer = LayerMask.NameToLayer("GunParts");
     }

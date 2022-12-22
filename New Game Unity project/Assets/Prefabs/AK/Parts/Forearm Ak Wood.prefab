@@ -145,5 +145,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 5
   ammo: 0
-  spread: 0
-  recoil: 0
+  spread: 0.02
+  recoil: 1

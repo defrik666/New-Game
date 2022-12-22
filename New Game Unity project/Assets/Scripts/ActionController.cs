@@ -22,5 +22,6 @@ public class ActionController : MonoBehaviour{
         controls.ShootingRange.Enable();
         controls.ShootingRange.Shoot.performed += gun.Shoot;
         controls.ShootingRange.Shoot.canceled += gun.Shoot;
+        controls.ShootingRange.Reload.performed += gun.Reload;
     }
 }
