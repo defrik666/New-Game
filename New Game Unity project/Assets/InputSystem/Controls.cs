@@ -72,6 +72,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UnlockCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""e06d2322-a67f-4ddb-9209-36dcfe067335"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -94,6 +103,56 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse+Keyboard"",
                     ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""008fc557-c2f4-4be9-bcd1-4004f5213bb7"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse+Keyboard"",
+                    ""action"": ""UnlockCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""MouseLock"",
+            ""id"": ""b9c18b6b-88ed-4290-99c7-a31a73859c20"",
+            ""actions"": [
+                {
+                    ""name"": ""LockMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""956efde3-2d40-4f95-9572-49c705951044"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b0518fdd-dd1f-4e49-b779-ed20fd2bccbf"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse+Keyboard"",
+                    ""action"": ""LockMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2818a442-1a27-4dac-9008-2169c57628b4"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse+Keyboard"",
+                    ""action"": ""LockMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -126,6 +185,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_ShootingRange = asset.FindActionMap("ShootingRange", throwIfNotFound: true);
         m_ShootingRange_Shoot = m_ShootingRange.FindAction("Shoot", throwIfNotFound: true);
         m_ShootingRange_Reload = m_ShootingRange.FindAction("Reload", throwIfNotFound: true);
+        m_ShootingRange_UnlockCursor = m_ShootingRange.FindAction("UnlockCursor", throwIfNotFound: true);
+        // MouseLock
+        m_MouseLock = asset.FindActionMap("MouseLock", throwIfNotFound: true);
+        m_MouseLock_LockMouse = m_MouseLock.FindAction("LockMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -220,12 +283,14 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private IShootingRangeActions m_ShootingRangeActionsCallbackInterface;
     private readonly InputAction m_ShootingRange_Shoot;
     private readonly InputAction m_ShootingRange_Reload;
+    private readonly InputAction m_ShootingRange_UnlockCursor;
     public struct ShootingRangeActions
     {
         private @Controls m_Wrapper;
         public ShootingRangeActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_ShootingRange_Shoot;
         public InputAction @Reload => m_Wrapper.m_ShootingRange_Reload;
+        public InputAction @UnlockCursor => m_Wrapper.m_ShootingRange_UnlockCursor;
         public InputActionMap Get() { return m_Wrapper.m_ShootingRange; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -241,6 +306,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Reload.started -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnReload;
+                @UnlockCursor.started -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnUnlockCursor;
+                @UnlockCursor.performed -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnUnlockCursor;
+                @UnlockCursor.canceled -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnUnlockCursor;
             }
             m_Wrapper.m_ShootingRangeActionsCallbackInterface = instance;
             if (instance != null)
@@ -251,10 +319,46 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
+                @UnlockCursor.started += instance.OnUnlockCursor;
+                @UnlockCursor.performed += instance.OnUnlockCursor;
+                @UnlockCursor.canceled += instance.OnUnlockCursor;
             }
         }
     }
     public ShootingRangeActions @ShootingRange => new ShootingRangeActions(this);
+
+    // MouseLock
+    private readonly InputActionMap m_MouseLock;
+    private IMouseLockActions m_MouseLockActionsCallbackInterface;
+    private readonly InputAction m_MouseLock_LockMouse;
+    public struct MouseLockActions
+    {
+        private @Controls m_Wrapper;
+        public MouseLockActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LockMouse => m_Wrapper.m_MouseLock_LockMouse;
+        public InputActionMap Get() { return m_Wrapper.m_MouseLock; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MouseLockActions set) { return set.Get(); }
+        public void SetCallbacks(IMouseLockActions instance)
+        {
+            if (m_Wrapper.m_MouseLockActionsCallbackInterface != null)
+            {
+                @LockMouse.started -= m_Wrapper.m_MouseLockActionsCallbackInterface.OnLockMouse;
+                @LockMouse.performed -= m_Wrapper.m_MouseLockActionsCallbackInterface.OnLockMouse;
+                @LockMouse.canceled -= m_Wrapper.m_MouseLockActionsCallbackInterface.OnLockMouse;
+            }
+            m_Wrapper.m_MouseLockActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @LockMouse.started += instance.OnLockMouse;
+                @LockMouse.performed += instance.OnLockMouse;
+                @LockMouse.canceled += instance.OnLockMouse;
+            }
+        }
+    }
+    public MouseLockActions @MouseLock => new MouseLockActions(this);
     private int m_MouseKeyboardSchemeIndex = -1;
     public InputControlScheme MouseKeyboardScheme
     {
@@ -272,5 +376,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnUnlockCursor(InputAction.CallbackContext context);
+    }
+    public interface IMouseLockActions
+    {
+        void OnLockMouse(InputAction.CallbackContext context);
     }
 }

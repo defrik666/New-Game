@@ -13,4 +13,8 @@ public class UI : MonoBehaviour
     public void ToRange(){
         changeLocation.MoveToRange();
     }
+
+    public void ToWorkbeanch(){
+        changeLocation.MoveToWorkbench();
+    }
 }
