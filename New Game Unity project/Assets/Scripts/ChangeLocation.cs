@@ -59,6 +59,8 @@ public class ChangeLocation : MonoBehaviour{
     }
 
     private IEnumerator GunMoveToRange(GameObject gunObj){
+        Cursor.lockState = CursorLockMode.Locked;
+
         workBench.SetActive(false);
         gunObj.transform.SetParent(transform);
 
@@ -102,7 +104,6 @@ public class ChangeLocation : MonoBehaviour{
         rangePos.GetComponent<MouseLook>().enabled = true;
         
         gun.GetComponent<Animator>().enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
         actionController.ChangeToRange(gun,this);
         yield return null;
     }

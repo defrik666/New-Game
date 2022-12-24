@@ -10,7 +10,9 @@ public class ActionController : MonoBehaviour{
     private void Awake() {
         controls = new Controls();
         cameraInt = FindObjectOfType<CameraInteraction>();
+    }
 
+    private void Start() {
         controls.Workbench.Enable();
         controls.Workbench.Interact.performed += cameraInt.Interact;
     }

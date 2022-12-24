@@ -48,7 +48,7 @@ public class AttachmentTypes_Editor : Editor
                 serializedObject.FindProperty("ammo").intValue = 0;
                 serializedObject.FindProperty("spread").floatValue = 0;
                 serializedObject.FindProperty("recoil").floatValue = 0;
-                serializedObject.ApplyModifiedProperties();
+                
                 break;
             case AttachmentStats.AttachmentTypes.Magazine:
                 serializedObject.FindProperty("spread").floatValue = 0;

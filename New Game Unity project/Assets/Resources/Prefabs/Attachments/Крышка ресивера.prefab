@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2312189534190670791}
   - component: {fileID: 7312620936662334401}
   m_Layer: 6
-  m_Name: ReceiveCover(AK)
+  m_Name: "\u041A\u0440\u044B\u0448\u043A\u0430 \u0440\u0435\u0441\u0438\u0432\u0435\u0440\u0430"
   m_TagString: Handguard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

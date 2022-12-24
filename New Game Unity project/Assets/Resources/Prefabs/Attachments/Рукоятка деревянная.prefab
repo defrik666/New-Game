@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4730991462999895086}
   - component: {fileID: 4630936033424051746}
   m_Layer: 6
-  m_Name: Handle Ak Wood
+  m_Name: "\u0420\u0443\u043A\u043E\u044F\u0442\u043A\u0430 \u0434\u0435\u0440\u0435\u0432\u044F\u043D\u043D\u0430\u044F"
   m_TagString: Handle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -17,7 +17,9 @@ public class GunStats : MonoBehaviour
         gun = FindObjectOfType<Gun>();
         spread = baseSpread;
         recoil = baseRecoil;
+    }
 
+    private void Start() {
         SetInfo();
     }
 
@@ -49,4 +51,5 @@ public class GunStats : MonoBehaviour
         gun.recoil = recoil;
         gun.spread = spread;
     }
+
 }

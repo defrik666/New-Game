@@ -34,6 +34,9 @@ public class Gun : MonoBehaviour{
         playerCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         recoilScript = FindObjectOfType<Recoil>();
         anim = GetComponent<Animator>();
+    }
+
+    private void Start() {
         bullets = ammo;
     }
 
