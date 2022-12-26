@@ -1,54 +1,9 @@
 fileFormatVersion: 2
-guid: c544ed16c85e25f4084a3f76c5821f8d
+guid: 20132c9662b931543a8cc3936e7d13a7
 ModelImporter:
   serializedVersion: 20300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Ammo
-    second: {fileID: 2100000, guid: 84dae71a9b2b71047a177c937e7014c5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Charge
-    second: {fileID: 2100000, guid: 3f288926af5c6044f89b25e5edd1e6ec, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Forearm
-    second: {fileID: 2100000, guid: d2280b4ecce637b4e9c5b3c88cb8f85f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: GasTube
-    second: {fileID: 2100000, guid: 9cb876286fb59eb4aa920edf18eb6246, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Handle
-    second: {fileID: 2100000, guid: 2b9d37b514c501e4384c68a063763429, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Receiver
-    second: {fileID: 2100000, guid: 217f740fe1a64ce4a828537315b7825b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Spring
-    second: {fileID: 2100000, guid: 77ca3b0929ba8c7489ee353d72d9e4bf, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TheBarrel
-    second: {fileID: 2100000, guid: 8360139384731cd41b18073eba3a2e17, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ValveChamber
-    second: {fileID: 2100000, guid: e28fe0988c8fc024f9e6b2323ec43001, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -10,6 +10,7 @@ TagManager:
   - Weapon
   - Magazine
   - Handguard
+  - Scope
   layers:
   - Default
   - TransparentFX

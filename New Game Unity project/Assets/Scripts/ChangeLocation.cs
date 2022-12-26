@@ -59,6 +59,7 @@ public class ChangeLocation : MonoBehaviour{
     }
 
     private IEnumerator GunMoveToRange(GameObject gunObj){
+        actionController.ChangeToRangeStart();
         Cursor.lockState = CursorLockMode.Locked;
 
         workBench.SetActive(false);
@@ -104,11 +105,13 @@ public class ChangeLocation : MonoBehaviour{
         rangePos.GetComponent<MouseLook>().enabled = true;
         
         gun.GetComponent<Animator>().enabled = true;
-        actionController.ChangeToRange(gun,this);
+        actionController.ChangeToRangeEnd(gun,this);
         yield return null;
     }
 
     private IEnumerator GunMoveToWorkbench(GameObject gunObj){
+        actionController.ChangeToWorkbenchStart();
+
         gameObject.GetComponent<Recoil>().enabled = false;
         rangePos.GetComponent<MouseLook>().enabled = false;
         gun.GetComponent<Animator>().enabled = false;
@@ -155,7 +158,7 @@ public class ChangeLocation : MonoBehaviour{
         transform.SetParent(playerPos.transform);
         
         Cursor.lockState = CursorLockMode.None;
-        actionController.ChangeToWorkbench();
+        actionController.ChangeToWorkbenchEnd();
         yield return null;
     }
 

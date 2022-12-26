@@ -81,6 +81,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scope"",
+                    ""type"": ""Button"",
+                    ""id"": ""04767a06-2707-488c-a261-865b13e10f6f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -103,6 +112,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse+Keyboard"",
                     ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c9c6e02-afe2-4347-9ced-7f90f9185e74"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse+Keyboard"",
+                    ""action"": ""Scope"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -137,7 +157,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b0518fdd-dd1f-4e49-b779-ed20fd2bccbf"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse+Keyboard"",
@@ -186,6 +206,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_ShootingRange_Shoot = m_ShootingRange.FindAction("Shoot", throwIfNotFound: true);
         m_ShootingRange_Reload = m_ShootingRange.FindAction("Reload", throwIfNotFound: true);
         m_ShootingRange_UnlockCursor = m_ShootingRange.FindAction("UnlockCursor", throwIfNotFound: true);
+        m_ShootingRange_Scope = m_ShootingRange.FindAction("Scope", throwIfNotFound: true);
         // MouseLock
         m_MouseLock = asset.FindActionMap("MouseLock", throwIfNotFound: true);
         m_MouseLock_LockMouse = m_MouseLock.FindAction("LockMouse", throwIfNotFound: true);
@@ -284,6 +305,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_ShootingRange_Shoot;
     private readonly InputAction m_ShootingRange_Reload;
     private readonly InputAction m_ShootingRange_UnlockCursor;
+    private readonly InputAction m_ShootingRange_Scope;
     public struct ShootingRangeActions
     {
         private @Controls m_Wrapper;
@@ -291,6 +313,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_ShootingRange_Shoot;
         public InputAction @Reload => m_Wrapper.m_ShootingRange_Reload;
         public InputAction @UnlockCursor => m_Wrapper.m_ShootingRange_UnlockCursor;
+        public InputAction @Scope => m_Wrapper.m_ShootingRange_Scope;
         public InputActionMap Get() { return m_Wrapper.m_ShootingRange; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -309,6 +332,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @UnlockCursor.started -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnUnlockCursor;
                 @UnlockCursor.performed -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnUnlockCursor;
                 @UnlockCursor.canceled -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnUnlockCursor;
+                @Scope.started -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnScope;
+                @Scope.performed -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnScope;
+                @Scope.canceled -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnScope;
             }
             m_Wrapper.m_ShootingRangeActionsCallbackInterface = instance;
             if (instance != null)
@@ -322,6 +348,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @UnlockCursor.started += instance.OnUnlockCursor;
                 @UnlockCursor.performed += instance.OnUnlockCursor;
                 @UnlockCursor.canceled += instance.OnUnlockCursor;
+                @Scope.started += instance.OnScope;
+                @Scope.performed += instance.OnScope;
+                @Scope.canceled += instance.OnScope;
             }
         }
     }
@@ -377,6 +406,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnUnlockCursor(InputAction.CallbackContext context);
+        void OnScope(InputAction.CallbackContext context);
     }
     public interface IMouseLockActions
     {

@@ -39,6 +39,9 @@ public class AttachmentShop : MonoBehaviour{
                 case AttachmentStats.AttachmentTypes.Handguard:
                 SpawnShopElement(obj,GameObject.Find("Handguards").transform,false);
                 break;
+                case AttachmentStats.AttachmentTypes.Scope:
+                SpawnShopElement(obj,GameObject.Find("Scopes").transform,false);
+                break;
             }
         }
 
@@ -47,6 +50,7 @@ public class AttachmentShop : MonoBehaviour{
         contentPos.Find("Handles").gameObject.SetActive(false);
         contentPos.Find("Forearms").gameObject.SetActive(false);
         contentPos.Find("Handguards").gameObject.SetActive(false);
+        contentPos.Find("Scopes").gameObject.SetActive(false);
     }
 
     private void Start() {
@@ -94,6 +98,9 @@ public class AttachmentShop : MonoBehaviour{
             break;
             case "Handguards":
             headerText.text = "Крышки ствольной коробки";
+            break;
+            case "Scopes":
+            headerText.text = "Прицелы";
             break;
         }
 

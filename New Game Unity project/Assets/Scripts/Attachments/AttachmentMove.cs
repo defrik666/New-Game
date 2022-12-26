@@ -6,11 +6,13 @@ public class AttachmentMove : MonoBehaviour
     public float speed = 5f;
     public bool pickedUp = false;
     public Rigidbody gameObjectRigbody;
+    public Collider boxCollider;
     public GameObject attachTriggerObj;
     public bool attached = false;
 
     private void Start(){
         gameObjectRigbody = this.gameObject.GetComponent<Rigidbody>();
+        boxCollider = this.gameObject.GetComponent<Collider>();
     }
 
     public void Pick(GameObject targetPos){  
@@ -25,10 +27,12 @@ public class AttachmentMove : MonoBehaviour
     public void OnPickUp(GameObject Pos){
         pickedUp = true;
         targetPos = Pos;
+        attached = false;
 
         gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         gameObjectRigbody.useGravity = false;
         gameObjectRigbody.isKinematic = false;
+        boxCollider.isTrigger = false;
     }
 
     public void OnPlaceDown(){
@@ -36,6 +40,7 @@ public class AttachmentMove : MonoBehaviour
         targetPos = null;
         gameObject.layer = LayerMask.NameToLayer("GunParts");
         gameObjectRigbody.useGravity = true;
+        boxCollider.isTrigger = false;
     }
 
     public void OnAttach(GameObject attachObj){
@@ -47,10 +52,12 @@ public class AttachmentMove : MonoBehaviour
         gameObjectRigbody.useGravity = false;
         gameObjectRigbody.velocity = Vector3.zero;
         gameObjectRigbody.isKinematic = true;
+
+        boxCollider.isTrigger = true;
   
         transform.SetParent(attachTriggerObj.transform);
+        Debug.Log(gameObject.name + "is cringe");
         transform.position = attachTriggerObj.transform.position;
-        // attachTriggerObj.GetComponent<AttachmentPoint>().enabled = false;
 
         gameObject.layer = LayerMask.NameToLayer("GunParts");
     }

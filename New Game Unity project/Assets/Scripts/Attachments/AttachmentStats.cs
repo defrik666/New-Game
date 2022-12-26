@@ -12,7 +12,8 @@ public class AttachmentStats : MonoBehaviour
         Handguard,
         GunStock,
         Handle,
-        Forearm
+        Forearm,
+        Scope
     }
     public AttachmentTypes _type = AttachmentTypes.None;
     [HideInInspector]
@@ -48,7 +49,8 @@ public class AttachmentTypes_Editor : Editor
                 serializedObject.FindProperty("ammo").intValue = 0;
                 serializedObject.FindProperty("spread").floatValue = 0;
                 serializedObject.FindProperty("recoil").floatValue = 0;
-                
+
+                serializedObject.ApplyModifiedProperties();
                 break;
             case AttachmentStats.AttachmentTypes.Magazine:
                 serializedObject.FindProperty("spread").floatValue = 0;
@@ -92,6 +94,13 @@ public class AttachmentTypes_Editor : Editor
                 script.recoil = EditorGUILayout.FloatField("Recoil reduction", script.recoil);
                 serializedObject.FindProperty("spread").floatValue = script.spread;
                 serializedObject.FindProperty("recoil").floatValue = script.recoil;
+                serializedObject.ApplyModifiedProperties();
+                break;
+            case AttachmentStats.AttachmentTypes.Scope:
+                serializedObject.FindProperty("ammo").intValue = 0;
+                serializedObject.FindProperty("spread").floatValue = 0;
+                serializedObject.FindProperty("recoil").floatValue = 0;
+
                 serializedObject.ApplyModifiedProperties();
                 break;
         }

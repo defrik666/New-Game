@@ -17,21 +17,27 @@ public class ActionController : MonoBehaviour{
         controls.Workbench.Interact.performed += cameraInt.Interact;
     }
 
-    public void ChangeToRange(Gun gun, ChangeLocation changeLocation){
+    public void ChangeToRangeStart(){
         controls.Workbench.Disable();
         controls.MouseLock.Disable();
+    }
 
+    public void ChangeToRangeEnd(Gun gun, ChangeLocation changeLocation){
         controls.ShootingRange.Enable();
         controls.ShootingRange.Shoot.performed += gun.Shoot;
         controls.ShootingRange.Shoot.canceled += gun.Shoot;
         controls.ShootingRange.Reload.performed += gun.Reload;
+        controls.ShootingRange.Scope.performed += gun.Scope;
         controls.ShootingRange.UnlockCursor.performed += changeLocation.UnLockCursor;
     }
 
-    public void ChangeToWorkbench(){    
-        controls.Workbench.Enable();
+    public void ChangeToWorkbenchStart(){    
         controls.ShootingRange.Disable();
         controls.MouseLock.Disable();
+    }
+
+    public void ChangeToWorkbenchEnd(){    
+        controls.Workbench.Enable();
     }
 
     public void ChangeMouseLock(ChangeLocation changeLocation){     

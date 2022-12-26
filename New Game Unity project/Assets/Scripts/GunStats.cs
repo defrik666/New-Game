@@ -24,7 +24,7 @@ public class GunStats : MonoBehaviour
     }
 
     public void AddAttachment(AttachmentStats attachment){
-        Debug.Log("Attachment added");
+        Debug.Log(attachment.name + "Attachment added");
         attachmentsList.Add(attachment);
 
         if(attachment._type == AttachmentStats.AttachmentTypes.Magazine) ammo = attachment.ammo;
@@ -35,7 +35,7 @@ public class GunStats : MonoBehaviour
     }
 
     public void RemoveAttachment(AttachmentStats attachment){
-        Debug.Log("Attachment removed");
+        Debug.Log(attachment.name + "Attachment removed");
         attachmentsList.Add(attachment);
 
         if(attachment._type == AttachmentStats.AttachmentTypes.Magazine) ammo = attachment.ammo;

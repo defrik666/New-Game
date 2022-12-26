@@ -19,6 +19,8 @@ public class Gun : MonoBehaviour{
     public Animator anim;
     public Transform shootingPoint;
     public LayerMask layerMask;
+    public GameObject normalPos;
+    public GameObject scopingPos;
 
     [Header("General Gun Stats")]
     [SerializeField] public int ammo;
@@ -27,7 +29,10 @@ public class Gun : MonoBehaviour{
     [SerializeField] public float spread;
     [SerializeField] public float recoil;
     [Header("Coroutines")]
-    Coroutine fireCoroutine;
+    private Coroutine fireCoroutine;
+    [SerializeField] private Coroutine ScopingCoroutine;
+    [Header("bools")]
+    [SerializeField] private bool isScoping = false;
 
 
     private void Awake(){
@@ -68,6 +73,27 @@ public class Gun : MonoBehaviour{
         }
     }
 
+    public void Scope(InputAction.CallbackContext context){
+        Debug.Log(context);
+        if(isScoping){
+            if(ScopingCoroutine != null){
+                StopCoroutine(ScopingCoroutine);
+            }
+            
+            ScopingCoroutine = StartCoroutine(UnScoping());
+            isScoping = false;
+        }
+        else{
+            if(ScopingCoroutine != null){
+                StopCoroutine(ScopingCoroutine);
+            }
+            
+            ScopingCoroutine = StartCoroutine(Scoping());
+            isScoping = true;
+        }
+
+    }
+    
     private void HandleHit(RaycastHit hit){
         if(hit.collider.sharedMaterial == null){
             SpawnDecal(hit, stoneHitEffect);
@@ -99,9 +125,6 @@ public class Gun : MonoBehaviour{
             //muzzleFlash.Play();
             //cartridgeEjection.Play();
 
-            //if (Bullets > 1) anim.Play("Shoot");
-            //else anim.Play("Shoot_Last");
-
             if(anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")){
                 anim.Play("Shoot");
                 bullets--;
@@ -124,5 +147,40 @@ public class Gun : MonoBehaviour{
         yield return null;   
     } 
 
+    private IEnumerator Scoping(){
+        Debug.Log("scope");
+
+        float moveStep = 0f;
+
+        while(Vector3.Distance(transform.parent.position, scopingPos.transform.position) > 0.001f){
+            moveStep += Time.deltaTime / 0.3f;
+
+            transform.parent.position = Vector3.Slerp(normalPos.transform.position, scopingPos.transform.position, moveStep);
+            
+            yield return new WaitForEndOfFrame();
+        }
+
+        transform.parent.position = scopingPos.transform.position;
+
+        yield return null;
+    }
+
+    private IEnumerator UnScoping(){
+        Debug.Log("unscope");
+
+        float moveStep = 0f;
+
+        while(Vector3.Distance(transform.parent.position, normalPos.transform.position) > 0.001f){
+            moveStep += Time.deltaTime / 0.3f;
+
+            transform.parent.position = Vector3.Slerp(scopingPos.transform.position, normalPos.transform.position, moveStep);
+            
+            yield return new WaitForEndOfFrame();
+        }
+
+        transform.parent.position = normalPos.transform.position;
+
+        yield return null;
+    }
 }
 

@@ -34,7 +34,7 @@ public class AttachmentPoint : MonoBehaviour
 
         if(other.CompareTag(gameObject.tag)){
             AttachmentMove attachment = other.gameObject.GetComponent<AttachmentMove>();
-            if(cooldown == true || attachment.attached == false){
+            if(cooldown == true || attachment.attached == true){
                 return;
             }
 
