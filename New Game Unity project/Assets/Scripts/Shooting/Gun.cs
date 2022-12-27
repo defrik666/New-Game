@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Gun : MonoBehaviour{
     [Header("General Effects")]
@@ -21,6 +22,7 @@ public class Gun : MonoBehaviour{
     public LayerMask layerMask;
     public GameObject normalPos;
     public GameObject scopingPos;
+    [SerializeField] private TextMeshProUGUI ammoText;
 
     [Header("General Gun Stats")]
     [SerializeField] public int ammo;
@@ -33,6 +35,7 @@ public class Gun : MonoBehaviour{
     [SerializeField] private Coroutine ScopingCoroutine;
     [Header("bools")]
     [SerializeField] private bool isScoping = false;
+    [SerializeField] private bool isReloading = false;
 
 
     private void Awake(){
@@ -52,7 +55,7 @@ public class Gun : MonoBehaviour{
     public void  Shoot(InputAction.CallbackContext context){
         Debug.Log(context);
         if(context.performed){
-            if (bullets <= 0){
+            if (bullets <= 0 || isReloading){
                 return;
             }
 
@@ -68,14 +71,24 @@ public class Gun : MonoBehaviour{
 
     public void Reload(InputAction.CallbackContext context){
         Debug.Log(context);
-        if(context.performed){
-            bullets = ammo;
+        if(bullets == ammo){
+            return;
         }
+        isReloading = true;
+        if(isScoping){
+            if(ScopingCoroutine != null){
+                StopCoroutine(ScopingCoroutine);
+            }
+            
+            ScopingCoroutine = StartCoroutine(UnScoping());
+            isScoping = false;
+        }
+        StartCoroutine(Reloading());
     }
 
     public void Scope(InputAction.CallbackContext context){
         Debug.Log(context);
-        if(isScoping){
+        if(isScoping || isReloading){
             if(ScopingCoroutine != null){
                 StopCoroutine(ScopingCoroutine);
             }
@@ -120,6 +133,10 @@ public class Gun : MonoBehaviour{
 		spawnedDecal.transform.SetParent(hit.collider.transform);
 	}
 
+    public void UpdateAmmoText(){
+        ammoText.text = $"Патроны: {bullets}/{ammo}";
+    }
+
     private IEnumerator Shooting(){
         while(bullets > 0){
             //muzzleFlash.Play();
@@ -128,6 +145,7 @@ public class Gun : MonoBehaviour{
             if(anim.GetCurrentAnimatorStateInfo(0).IsName("Idle")){
                 anim.Play("Shoot");
                 bullets--;
+                UpdateAmmoText();
 
                 Vector3 spreadDir = new Vector3 (Random.Range(-spread,spread),Random.Range(-spread,spread),Random.Range(-spread,spread));
 
@@ -136,9 +154,17 @@ public class Gun : MonoBehaviour{
 
                 if (Physics.Raycast(startPoint, direction.normalized, out RayHit, range, layerMask)){
                     HandleHit(RayHit);
+                    if(RayHit.collider.tag == "Target"){
+                        RayHit.collider.GetComponent<Target>().GetHit();
+                    }
                 }
-
-                recoilScript.RecoilFire(recoil);
+                if(isScoping){
+                    recoilScript.RecoilFire(recoil/2);
+                }
+                else{
+                    recoilScript.RecoilFire(recoil);
+                }
+                
             }
 
             //yield return new WaitForSeconds(0.1f);
@@ -180,6 +206,15 @@ public class Gun : MonoBehaviour{
 
         transform.parent.position = normalPos.transform.position;
 
+        yield return null;
+    }
+
+    private IEnumerator Reloading(){
+        anim.Play("Reload");
+        yield return new WaitForSeconds(1.333f);
+        bullets = ammo;
+        UpdateAmmoText();
+        isReloading = false;
         yield return null;
     }
 }

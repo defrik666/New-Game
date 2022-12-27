@@ -29,6 +29,9 @@ public class ActionController : MonoBehaviour{
         controls.ShootingRange.Reload.performed += gun.Reload;
         controls.ShootingRange.Scope.performed += gun.Scope;
         controls.ShootingRange.UnlockCursor.performed += changeLocation.UnLockCursor;
+        if(FindObjectOfType<Laser>() != null){
+            controls.ShootingRange.Laser.performed += FindObjectOfType<Laser>().TurnOnOff;
+        }
     }
 
     public void ChangeToWorkbenchStart(){    

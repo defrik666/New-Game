@@ -56,7 +56,6 @@ public class AttachmentMove : MonoBehaviour
         boxCollider.isTrigger = true;
   
         transform.SetParent(attachTriggerObj.transform);
-        Debug.Log(gameObject.name + "is cringe");
         transform.position = attachTriggerObj.transform.position;
 
         gameObject.layer = LayerMask.NameToLayer("GunParts");

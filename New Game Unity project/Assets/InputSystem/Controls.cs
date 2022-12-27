@@ -90,6 +90,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Laser"",
+                    ""type"": ""Button"",
+                    ""id"": ""3055d627-6852-4a0d-8a04-5f18975af991"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -136,6 +145,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""UnlockCursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b776078f-786e-421c-88d1-2cd2c9758c22"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse+Keyboard"",
+                    ""action"": ""Laser"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -154,17 +174,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""b0518fdd-dd1f-4e49-b779-ed20fd2bccbf"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse+Keyboard"",
-                    ""action"": ""LockMouse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""2818a442-1a27-4dac-9008-2169c57628b4"",
@@ -207,6 +216,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_ShootingRange_Reload = m_ShootingRange.FindAction("Reload", throwIfNotFound: true);
         m_ShootingRange_UnlockCursor = m_ShootingRange.FindAction("UnlockCursor", throwIfNotFound: true);
         m_ShootingRange_Scope = m_ShootingRange.FindAction("Scope", throwIfNotFound: true);
+        m_ShootingRange_Laser = m_ShootingRange.FindAction("Laser", throwIfNotFound: true);
         // MouseLock
         m_MouseLock = asset.FindActionMap("MouseLock", throwIfNotFound: true);
         m_MouseLock_LockMouse = m_MouseLock.FindAction("LockMouse", throwIfNotFound: true);
@@ -306,6 +316,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_ShootingRange_Reload;
     private readonly InputAction m_ShootingRange_UnlockCursor;
     private readonly InputAction m_ShootingRange_Scope;
+    private readonly InputAction m_ShootingRange_Laser;
     public struct ShootingRangeActions
     {
         private @Controls m_Wrapper;
@@ -314,6 +325,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Reload => m_Wrapper.m_ShootingRange_Reload;
         public InputAction @UnlockCursor => m_Wrapper.m_ShootingRange_UnlockCursor;
         public InputAction @Scope => m_Wrapper.m_ShootingRange_Scope;
+        public InputAction @Laser => m_Wrapper.m_ShootingRange_Laser;
         public InputActionMap Get() { return m_Wrapper.m_ShootingRange; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -335,6 +347,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Scope.started -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnScope;
                 @Scope.performed -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnScope;
                 @Scope.canceled -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnScope;
+                @Laser.started -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnLaser;
+                @Laser.performed -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnLaser;
+                @Laser.canceled -= m_Wrapper.m_ShootingRangeActionsCallbackInterface.OnLaser;
             }
             m_Wrapper.m_ShootingRangeActionsCallbackInterface = instance;
             if (instance != null)
@@ -351,6 +366,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Scope.started += instance.OnScope;
                 @Scope.performed += instance.OnScope;
                 @Scope.canceled += instance.OnScope;
+                @Laser.started += instance.OnLaser;
+                @Laser.performed += instance.OnLaser;
+                @Laser.canceled += instance.OnLaser;
             }
         }
     }
@@ -407,6 +425,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnUnlockCursor(InputAction.CallbackContext context);
         void OnScope(InputAction.CallbackContext context);
+        void OnLaser(InputAction.CallbackContext context);
     }
     public interface IMouseLockActions
     {

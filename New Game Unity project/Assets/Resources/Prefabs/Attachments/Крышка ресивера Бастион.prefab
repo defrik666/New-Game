@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 91854976313567477}
   - component: {fileID: 2783966553905126463}
   - component: {fileID: -3232010497945744524}
+  - component: {fileID: 4934132523648190125}
   - component: {fileID: 3256636417649019869}
   - component: {fileID: -3118302393800262731}
-  - component: {fileID: 4934132523648190125}
   m_Layer: 6
   m_Name: "\u041A\u0440\u044B\u0448\u043A\u0430 \u0440\u0435\u0441\u0438\u0432\u0435\u0440\u0430
     \u0411\u0430\u0441\u0442\u0438\u043E\u043D"
@@ -30,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4441216243671432682}
-  m_LocalRotation: {x: -0.5, y: -0.49999997, z: 0.5, w: 0.50000006}
+  m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: 0, w: 0}
   m_LocalPosition: {x: 0.24526697, y: 0.25000012, z: -7.984624}
   m_LocalScale: {x: 0.0799894, y: 0.060895506, z: 0.07847514}
   m_Children:
   - {fileID: 3250777768740970911}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 90}
 --- !u!33 &91854976313567477
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -103,6 +103,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!65 &4934132523648190125
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4441216243671432682}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2141792, y: 1.9756523, z: 10.388258}
+  m_Center: {x: 0.60708916, y: -0.0000058521246, z: -4.162942}
 --- !u!114 &3256636417649019869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,21 +149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 2
   ammo: 0
-  spread: 0
-  recoil: 0
---- !u!65 &4934132523648190125
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4441216243671432682}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2141792, y: 1.9756523, z: 10.388258}
-  m_Center: {x: 0.60708916, y: -0.0000058521246, z: -4.162942}
+  spread: 0.01
+  recoil: 0.5
 --- !u!1 &8013572239853223161
 GameObject:
   m_ObjectHideFlags: 0

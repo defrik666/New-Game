@@ -68,6 +68,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Laser",
+                    "type": "Button",
+                    "id": "3055d627-6852-4a0d-8a04-5f18975af991",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -114,6 +123,17 @@
                     "action": "UnlockCursor",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b776078f-786e-421c-88d1-2cd2c9758c22",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse+Keyboard",
+                    "action": "Laser",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -132,17 +152,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "b0518fdd-dd1f-4e49-b779-ed20fd2bccbf",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse+Keyboard",
-                    "action": "LockMouse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "2818a442-1a27-4dac-9008-2169c57628b4",

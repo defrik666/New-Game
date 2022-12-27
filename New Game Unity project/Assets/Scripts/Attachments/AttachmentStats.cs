@@ -11,9 +11,14 @@ public class AttachmentStats : MonoBehaviour
         Magazine,
         Handguard,
         GunStock,
+        ComplexGunStock,
+        StockExtensionPad,
         Handle,
         Forearm,
-        Scope
+        Scope,
+        ForearmHandle,
+        Barrel,
+        LAM
     }
     public AttachmentTypes _type = AttachmentTypes.None;
     [HideInInspector]
@@ -53,9 +58,10 @@ public class AttachmentTypes_Editor : Editor
                 serializedObject.ApplyModifiedProperties();
                 break;
             case AttachmentStats.AttachmentTypes.Magazine:
-                serializedObject.FindProperty("spread").floatValue = 0;
-                serializedObject.FindProperty("recoil").floatValue = 0;
-
+                script.spread = EditorGUILayout.FloatField("Spread reduction", script.spread);
+                script.recoil = EditorGUILayout.FloatField("Recoil reduction", script.recoil);
+                serializedObject.FindProperty("spread").floatValue = script.spread;
+                serializedObject.FindProperty("recoil").floatValue = script.recoil;
                 script.ammo = EditorGUILayout.IntField("Ammo capacity", script.ammo);
                 serializedObject.FindProperty("ammo").intValue = script.ammo;
                 serializedObject.ApplyModifiedProperties();
@@ -70,6 +76,24 @@ public class AttachmentTypes_Editor : Editor
                 serializedObject.ApplyModifiedProperties();
                 break;
             case AttachmentStats.AttachmentTypes.GunStock:
+                serializedObject.FindProperty("ammo").intValue = 0;
+
+                script.spread = EditorGUILayout.FloatField("Spread reduction", script.spread);
+                script.recoil = EditorGUILayout.FloatField("Recoil reduction", script.recoil);
+                serializedObject.FindProperty("spread").floatValue = script.spread;
+                serializedObject.FindProperty("recoil").floatValue = script.recoil;
+                serializedObject.ApplyModifiedProperties();
+                break;
+            case AttachmentStats.AttachmentTypes.ComplexGunStock:
+                serializedObject.FindProperty("ammo").intValue = 0;
+
+                script.spread = EditorGUILayout.FloatField("Spread reduction", script.spread);
+                script.recoil = EditorGUILayout.FloatField("Recoil reduction", script.recoil);
+                serializedObject.FindProperty("spread").floatValue = script.spread;
+                serializedObject.FindProperty("recoil").floatValue = script.recoil;
+                serializedObject.ApplyModifiedProperties();
+                break;
+            case AttachmentStats.AttachmentTypes.StockExtensionPad:
                 serializedObject.FindProperty("ammo").intValue = 0;
 
                 script.spread = EditorGUILayout.FloatField("Spread reduction", script.spread);
@@ -98,9 +122,38 @@ public class AttachmentTypes_Editor : Editor
                 break;
             case AttachmentStats.AttachmentTypes.Scope:
                 serializedObject.FindProperty("ammo").intValue = 0;
-                serializedObject.FindProperty("spread").floatValue = 0;
-                serializedObject.FindProperty("recoil").floatValue = 0;
 
+                script.spread = EditorGUILayout.FloatField("Spread reduction", script.spread);
+                script.recoil = EditorGUILayout.FloatField("Recoil reduction", script.recoil);
+                serializedObject.FindProperty("spread").floatValue = script.spread;
+                serializedObject.FindProperty("recoil").floatValue = script.recoil;
+                serializedObject.ApplyModifiedProperties();
+                break;
+            case AttachmentStats.AttachmentTypes.ForearmHandle:
+                serializedObject.FindProperty("ammo").intValue = 0;
+
+                script.spread = EditorGUILayout.FloatField("Spread reduction", script.spread);
+                script.recoil = EditorGUILayout.FloatField("Recoil reduction", script.recoil);
+                serializedObject.FindProperty("spread").floatValue = script.spread;
+                serializedObject.FindProperty("recoil").floatValue = script.recoil;
+                serializedObject.ApplyModifiedProperties();
+                break;
+            case AttachmentStats.AttachmentTypes.Barrel:
+                serializedObject.FindProperty("ammo").intValue = 0;
+
+                script.spread = EditorGUILayout.FloatField("Spread reduction", script.spread);
+                script.recoil = EditorGUILayout.FloatField("Recoil reduction", script.recoil);
+                serializedObject.FindProperty("spread").floatValue = script.spread;
+                serializedObject.FindProperty("recoil").floatValue = script.recoil;
+                serializedObject.ApplyModifiedProperties();
+                break;
+            case AttachmentStats.AttachmentTypes.LAM:
+                serializedObject.FindProperty("ammo").intValue = 0;
+
+                script.spread = EditorGUILayout.FloatField("Spread reduction", script.spread);
+                script.recoil = EditorGUILayout.FloatField("Recoil reduction", script.recoil);
+                serializedObject.FindProperty("spread").floatValue = script.spread;
+                serializedObject.FindProperty("recoil").floatValue = script.recoil;
                 serializedObject.ApplyModifiedProperties();
                 break;
         }

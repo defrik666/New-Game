@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1168405544301513212}
   - component: {fileID: 2853269179887208025}
   - component: {fileID: 34953999735042707}
+  - component: {fileID: 6998655856332389345}
   - component: {fileID: 6175054609065770042}
   - component: {fileID: 6029945675559220474}
   - component: {fileID: 8327678924646745179}
-  - component: {fileID: 6998655856332389345}
   m_Layer: 6
   m_Name: "\u041F\u0440\u0438\u043A\u043B\u0430\u0434 \u0434\u0435\u0440\u0435\u0432\u044F\u043D\u043D\u044B\u0439"
   m_TagString: GunStock
@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980688878524175174}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.49991274, y: -0.50008726, z: -0.49991274, w: 0.50008726}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3608648, y: 1.0252374, z: 1.1543283}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: -90, z: 0}
 --- !u!33 &2853269179887208025
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -85,52 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6175054609065770042
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1980688878524175174}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.44836956, y: 0.089644246, z: 0.20523056}
-  m_Center: {x: -0.1932728, y: -0.0013842467, z: 0.009266565}
---- !u!114 &6029945675559220474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1980688878524175174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca517752d20607d46b40d426db6c6089, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPos: {fileID: 0}
-  speed: 5
-  pickedUp: 0
-  gameObjectRigbody: {fileID: 0}
-  attachTrigger: {fileID: 0}
---- !u!114 &8327678924646745179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1980688878524175174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec973b06d1b9384aa6f958c20152e01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _type: 3
-  ammo: 0
-  spread: 0.02
-  recoil: 2
 --- !u!54 &6998655856332389345
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -147,3 +101,51 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &6175054609065770042
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980688878524175174}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.44836956, y: 0.089644246, z: 0.20523056}
+  m_Center: {x: -0.19327274, y: -0.0013847236, z: 0.009266684}
+--- !u!114 &6029945675559220474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980688878524175174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca517752d20607d46b40d426db6c6089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {fileID: 0}
+  speed: 5
+  pickedUp: 0
+  gameObjectRigbody: {fileID: 0}
+  boxCollider: {fileID: 0}
+  attachTriggerObj: {fileID: 0}
+  attached: 0
+--- !u!114 &8327678924646745179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980688878524175174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec973b06d1b9384aa6f958c20152e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 3
+  ammo: 0
+  spread: 0.02
+  recoil: 2.5

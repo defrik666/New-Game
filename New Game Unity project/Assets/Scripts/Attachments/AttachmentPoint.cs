@@ -7,6 +7,7 @@ public class AttachmentPoint : MonoBehaviour
     private CameraInteraction camInt;
     private GunStats gunStats;
     private bool cooldown = false;
+    private bool attached = false;
 
     private void Start() {
         camInt = FindObjectOfType<CameraInteraction>();
@@ -15,6 +16,9 @@ public class AttachmentPoint : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
+        if(attached){
+            return;
+        }
 
         if(other.gameObject.CompareTag(gameObject.tag)){
             AttachmentMove attachment = other.gameObject.GetComponent<AttachmentMove>();
@@ -23,9 +27,11 @@ public class AttachmentPoint : MonoBehaviour
             }
 
             gunStats.AddAttachment(attachment.GetComponent<AttachmentStats>());
+            if(attachment.targetPos != null){
+                camInt.pickedUp = false;
+            }
             attachment.OnAttach(gameObject);
-            camInt.pickedUp = false;
-
+            attached = true;
             StartCoroutine(Enter());
         }
     }
@@ -41,6 +47,7 @@ public class AttachmentPoint : MonoBehaviour
             gunStats.RemoveAttachment(attachment.GetComponent<AttachmentStats>());
             attachment.transform.SetParent(workArea);
             attachment.attached = false;
+            attached = false;
             StartCoroutine(Exit());
         }
     }

@@ -29,13 +29,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346156051891986208}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.49991274, y: -0.50008726, z: -0.49991274, w: 0.50008726}
   m_LocalPosition: {x: 0.954, y: 1.592, z: -7.484}
   m_LocalScale: {x: 0.9838204, y: 0.44204977, z: 0.87168115}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: -90, z: 0}
 --- !u!33 &1628447931789339166
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -130,7 +130,9 @@ MonoBehaviour:
   speed: 5
   pickedUp: 0
   gameObjectRigbody: {fileID: 0}
-  attachTrigger: {fileID: 0}
+  boxCollider: {fileID: 0}
+  attachTriggerObj: {fileID: 0}
+  attached: 0
 --- !u!114 &3403390263107089526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec973b06d1b9384aa6f958c20152e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 5
+  _type: 7
   ammo: 0
-  spread: 0.02
+  spread: 0.035
   recoil: 1

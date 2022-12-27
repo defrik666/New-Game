@@ -1,6 +1,5 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -26,6 +25,14 @@ public class UI : MonoBehaviour
         attachmentShop.shopButton = shopButton;
         shopButton.SetActive(false);
         
+    }
+
+    public void ChangeLevel(int levelIndex){
+        SceneManager.LoadScene(levelIndex);
+    }
+
+    public void Exit(){
+        Application.Quit();
     }
 
 }

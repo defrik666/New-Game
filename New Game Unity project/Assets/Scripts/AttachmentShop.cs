@@ -27,11 +27,20 @@ public class AttachmentShop : MonoBehaviour{
                 case AttachmentStats.AttachmentTypes.GunStock:
                 SpawnShopElement(obj,GameObject.Find("Gunstoks").transform,false);
                 break;
+                case AttachmentStats.AttachmentTypes.ComplexGunStock:
+                SpawnShopElement(obj,GameObject.Find("Gunstoks").transform,false);
+                break;
+                case AttachmentStats.AttachmentTypes.StockExtensionPad:
+                SpawnShopElement(obj,GameObject.Find("Gunstoks").transform,false);
+                break;
                 case AttachmentStats.AttachmentTypes.Magazine:
                 SpawnShopElement(obj,GameObject.Find("Magazines").transform,true);
                 break;
                 case AttachmentStats.AttachmentTypes.Handle:
                 SpawnShopElement(obj,GameObject.Find("Handles").transform,false);
+                break;
+                case AttachmentStats.AttachmentTypes.ForearmHandle:
+                SpawnShopElement(obj,GameObject.Find("ForearmHandles").transform,false);
                 break;
                 case AttachmentStats.AttachmentTypes.Forearm:
                 SpawnShopElement(obj,GameObject.Find("Forearms").transform,false);
@@ -42,15 +51,24 @@ public class AttachmentShop : MonoBehaviour{
                 case AttachmentStats.AttachmentTypes.Scope:
                 SpawnShopElement(obj,GameObject.Find("Scopes").transform,false);
                 break;
+                case AttachmentStats.AttachmentTypes.Barrel:
+                SpawnShopElement(obj,GameObject.Find("Barrels").transform,false);
+                break;
+                case AttachmentStats.AttachmentTypes.LAM:
+                SpawnShopElement(obj,GameObject.Find("LAM").transform,false);
+                break;
             }
         }
 
         contentPos.Find("Gunstoks").gameObject.SetActive(false);
         contentPos.Find("Magazines").gameObject.SetActive(false);
         contentPos.Find("Handles").gameObject.SetActive(false);
+        contentPos.Find("ForearmHandles").gameObject.SetActive(false);
         contentPos.Find("Forearms").gameObject.SetActive(false);
         contentPos.Find("Handguards").gameObject.SetActive(false);
         contentPos.Find("Scopes").gameObject.SetActive(false);
+        contentPos.Find("Barrels").gameObject.SetActive(false);
+        contentPos.Find("LAM").gameObject.SetActive(false);
     }
 
     private void Start() {
@@ -67,8 +85,8 @@ public class AttachmentShop : MonoBehaviour{
         shopElement.transform.Find("Texts/Name").gameObject.GetComponent<TextMeshProUGUI>().text = attachment.name;
         if(isMagazine){
             shopElement.transform.Find("Texts/Ammo").gameObject.GetComponent<TextMeshProUGUI>().text = $"Количество патрон: {attachment.GetComponent<AttachmentStats>().ammo}";
-            shopElement.transform.Find("Texts/Spread").gameObject.SetActive(false);
-            shopElement.transform.Find("Texts/Recoil").gameObject.SetActive(false);
+            shopElement.transform.Find("Texts/Spread").gameObject.GetComponent<TextMeshProUGUI>().text = $"Уменьшение разброса: {attachment.GetComponent<AttachmentStats>().spread}";
+        shopElement.transform.Find("Texts/Recoil").gameObject.GetComponent<TextMeshProUGUI>().text = $"Уменьшение отдачи: {attachment.GetComponent<AttachmentStats>().recoil}";
             return;
         }
         shopElement.transform.Find("Texts/Ammo").gameObject.SetActive(false);
@@ -101,6 +119,12 @@ public class AttachmentShop : MonoBehaviour{
             break;
             case "Scopes":
             headerText.text = "Прицелы";
+            break;
+            case "Barrels":
+            headerText.text = "ДТК";
+            break;
+            case "LAM":
+            headerText.text = "Лазеры";
             break;
         }
 

@@ -110,6 +110,7 @@ public class ChangeLocation : MonoBehaviour{
     }
 
     private IEnumerator GunMoveToWorkbench(GameObject gunObj){
+        Debug.Log("cringe");
         actionController.ChangeToWorkbenchStart();
 
         gameObject.GetComponent<Recoil>().enabled = false;

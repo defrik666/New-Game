@@ -32,11 +32,14 @@ public class CameraInteraction : MonoBehaviour{
     }
 
     private void RaycastCheck(RaycastHit hit) {
+        Debug.Log(hit.collider.name);
         if(hit.collider.TryGetComponent<AttachmentMove>(out AttachmentMove comp)){
+            
             attachment = comp;
             pickedUp = true;
 
             attachment.OnPickUp(targetPos);
+            attachment.gameObjectRigbody.velocity = Vector3.zero;
         }
     }
 }

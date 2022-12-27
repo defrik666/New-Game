@@ -11,6 +11,12 @@ TagManager:
   - Magazine
   - Handguard
   - Scope
+  - ComplexGunStock
+  - StockExtensionPad
+  - ForearmHandle
+  - Target
+  - Barrel
+  - LAM
   layers:
   - Default
   - TransparentFX

@@ -50,6 +50,8 @@ public class GunStats : MonoBehaviour
         gun.bullets = gun.ammo;
         gun.recoil = recoil;
         gun.spread = spread;
+
+        gun.UpdateAmmoText();
     }
 
 }
